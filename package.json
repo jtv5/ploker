@@ -1,0 +1,25 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.5.1",
+    "jade": "*",
+    "ect": "~0.5.9",
+    "socket.io": "*"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-sass": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-jasmine": "*",
+    "grunt-cssc": "*",
+    "grunt-htmlhint": "*",
+    "matchdep": "*"
+  }
+}
