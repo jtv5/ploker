@@ -24,7 +24,7 @@ plannerPoker.factory('$socket', function ($rootScope) {
   };
 });
  
-plannerPoker.controller('plannerPokerCtrl', ['$scope', '$socket', function($scope, $socket) {
+plannerPoker.controller('PlanningPokerCtrl', ['$scope', '$socket', function($scope, $socket) {
     $scope.cards = [
         {'number': '0'},
         {'number': '1/2'},
@@ -43,7 +43,7 @@ plannerPoker.controller('plannerPokerCtrl', ['$scope', '$socket', function($scop
     };
 }]);
 
-plannerPoker.controller('pokerTableCtrl', ['$scope', '$socket', function($scope, $socket) {   
+plannerPoker.controller('PokerTableCtrl', ['$scope', '$socket', function($scope, $socket) {   
     $socket.on('updateCards', function (data) {
         $scope.pokerCards = data;
     });

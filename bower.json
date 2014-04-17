@@ -22,5 +22,7 @@
     "angular": "~1.2.16",
     "socket.io-client": "~0.9.16"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "angular-mocks": "~1.2.16"
+  }
 }

@@ -15,6 +15,7 @@ module.exports = function(grunt){
             controllers: {
                 src: [
                     'bower_components/angular/angular.min.js',
+                    'bower_components/angular-mocks/angular-mocks.js',
                     'public/javascripts/controllers.js'
                 ],
                 options: {
