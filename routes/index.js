@@ -4,5 +4,5 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', {title: "Planner Poker"});
+  res.render('index', {title: "Welcome to planner poker"});
 };

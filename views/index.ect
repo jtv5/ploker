@@ -1,20 +1,11 @@
 <% extend 'layout' %>
 
-<div class="jumbotron">
+<div class="container">
     <h1><%- @title %></h1>
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="row" ng-controller="PokerTableCtrl">
-                <div class="col-md-1 text-center" ng-repeat="card in pokerCards">
-                    <a href="#" class="thumbnail">{{card.card}}</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row" ng-controller="PlanningPokerCtrl">
-        <div class="col-md-1 text-center" ng-repeat="card in cards">
-            <a href="#" class="thumbnail" ng-click="sendCard(card.number)">{{card.number}}</a>
-        </div>
-    </div>
+    <form role="form" class="form-inline" method="post" action="/login">
+        <input type="text" class="input-lg form-control" id="yourName" name="name" placeholder="Enter your name">
+        <button type="submit" class="btn btn-primary btn-lg">Play</button>
+    </form>
 </div>
+
+

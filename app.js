@@ -6,6 +6,7 @@
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
+var play = require('./routes/play');
 var http = require('http');
 var path = require('path');
 var ECT = require('ect');
@@ -41,9 +42,15 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
-
 app.get('/', routes.index);
+app.get('/play', play.play);
 app.get('/users', user.list);
+
+app.post('/login', function(req, res) {
+    var name = req.body.name;
+    console.log(name);
+    res.redirect('/play');
+});
 
 var cards = [];
 
@@ -58,4 +65,9 @@ io.sockets.on('connection', function (socket) {
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
+});
+
+app.use(function(err, req, res, next){
+  console.error(err.stack);
+  res.send(500, 'Something broke!');
 });
