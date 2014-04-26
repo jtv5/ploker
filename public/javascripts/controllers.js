@@ -1,7 +1,7 @@
 var plannerPoker = angular.module('plannerPoker', []);
 
 plannerPoker.factory('$socket', function ($rootScope) {
-  var socket = io.connect('http://localhost:3000');
+  var socket = io.connect('http://localhost:3000/');
   return {
     on: function (eventName, callback) {
       socket.on(eventName, function () {  
@@ -36,11 +36,14 @@ plannerPoker.controller('PlanningPokerCtrl', ['$scope', '$socket', function($sco
         {'number': '21'},
         {'number': '40'},
         {'number': '100'}
-    ];    
+    ];
+
+    $socket.emit('join room', { room: game });    
 
     $scope.sendCard = function(card) {
-        $socket.emit('send card', { card: card });
+        $socket.emit('send card', { card: card, room: game});
     };
+
 }]);
 
 plannerPoker.controller('PokerTableCtrl', ['$scope', '$socket', function($scope, $socket) {   

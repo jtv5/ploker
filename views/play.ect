@@ -1,20 +1,23 @@
 <% extend 'layout' %>
 
-<div class="container">
+<div class="container text-center">
     <h1><%- @title %></h1>
-    <div class="panel panel-default">
+    <div class="panel panel-default poker">
         <div class="panel-body">
             <div class="row" ng-controller="PokerTableCtrl">
                 <div class="col-md-1 text-center" ng-repeat="card in pokerCards">
-                    <a href="#" class="thumbnail">{{card.card}}</a>
+                    <a href="#" class="thumbnail poker">{{card.card}}</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="row" ng-controller="PlanningPokerCtrl">
-        <div class="col-md-1 text-center" ng-repeat="card in cards">
-            <a href="#" class="thumbnail" ng-click="sendCard(card.number)">{{card.number}}</a>
+        <div class="col-md-1 text-center poker" ng-repeat="card in cards">
+            <a href="#" class="thumbnail poker" ng-click="sendCard(card.number)">{{card.number}}</a>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+var game = '<%- @game %>';
+</script>

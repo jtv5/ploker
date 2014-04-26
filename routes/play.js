@@ -4,5 +4,7 @@
  */
 
 exports.play = function(req, res){
-  res.render('play', {title: "Planner Poker"});
+    var game = req.params.game;
+    console.log('game ID: ' + game);
+    res.render('play', {title: "Planner Poker", game: game});
 };
