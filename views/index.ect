@@ -3,6 +3,7 @@
 <div class="container text-center">
     <h1><%- @title %></h1>
     <form role="form" class="form-inline" method="post" action="/login">
+        <input type="hidden" name="gameId" value="<%- @game %>">
         <input type="text" class="input-lg form-control" id="yourName" name="name" placeholder="Enter your name">
         <button type="submit" class="btn btn-primary btn-lg">Play</button>
     </form>

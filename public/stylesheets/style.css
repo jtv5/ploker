@@ -1,13 +1,9 @@
 a.poker {
-    background: url('/images/playing_card_empty.png');
-    background-size: 71px 100px;
-    background-repeat:no-repeat;
     min-height:100px; height:100px;
     min-width:71px; width:71px;
     line-height:90px;
-    font-size: 1em;
-    color: black;
+    font-size: 2em;
 }
 div.poker {
-    vertical-align: middle;
+    #vertical-align: middle;
 }

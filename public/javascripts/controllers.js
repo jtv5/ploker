@@ -41,7 +41,7 @@ plannerPoker.controller('PlanningPokerCtrl', ['$scope', '$socket', function($sco
     $socket.emit('join room', { room: game });    
 
     $scope.sendCard = function(card) {
-        $socket.emit('send card', { card: card, room: game});
+        $socket.emit('send card', { card: card, room: game, fromUser: userName});
     };
 
 }]);
