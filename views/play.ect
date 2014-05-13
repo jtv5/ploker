@@ -2,9 +2,18 @@
 
 <div class="container text-center">
     <h1><%- @title %></h1>
-    <div class="panel panel-default poker">
+    <div class="panel panel-default poker-table">
         <div class="panel-body">
             <div class="row" ng-controller="PokerTableCtrl">
+                <div class="col-sm-4 placeholder"></div>
+                <div class="col-sm-4 placeholder" ng-controller="PokerUserTableCtrl">
+                  <div id="big-circle" class="circle big">
+                        <div class="circle" ng-repeat="user in users" style="top:{{user.top}};left:{{user.left}};">
+                            {{user.name}}
+                        </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 placeholder"></div>
                 <div class="col-md-1 text-center" ng-repeat="card in pokerCards">
                     <a href="#" class="thumbnail poker">{{card.card}}</a>
                     {{card.fromUser}}

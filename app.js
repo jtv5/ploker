@@ -22,6 +22,7 @@ var ectRenderer = ECT({ watch: true, root: __dirname + '/views', ext : '.ect' })
 
 var name = "";
 var cards = {};
+var users = {};
 
 // all environments
 //app.set('port', process.env.PORT || 3000);
@@ -41,6 +42,7 @@ app.use(express.session({secret: 'HGygyfYTEgfh*&^4hgHgFDy654'}));
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
+
 
 // development only
 if ('development' == app.get('env')) {
@@ -66,7 +68,9 @@ app.post('/login', function(req, res) {
     } else {
         token = getToken();
         cards[token] = [];
+        users[token] = [];
     }
+    users[token].push(req.body.name);
     req.session.userName = req.body.name;
     res.redirect('/play/' + token);
 });
@@ -74,9 +78,13 @@ app.post('/login', function(req, res) {
 io.sockets.on('connection', function (socket) {
     socket.on('join room', function(data) {
         var room = data.room;
+        socket.userName = data.userName;
         socket.join(room);
         io.sockets.in(room).emit('updateCards', cards[room]);
-        console.log("joined room" + data.room);
+        io.sockets.in(room).emit('updateUsers', users[room]);
+        console.log("Number of users: " + io.sockets.in(room).clients().length);
+        console.log("Joined room: " + data.room);
+        console.log("Joined user: " + data.userName);
     });
 
     socket.on('send card', function (data) {
