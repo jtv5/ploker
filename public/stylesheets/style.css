@@ -31,3 +31,17 @@ div.poker-table div.row {
     position: relative;
     z-index: 1;
 }
+
+.rec {
+    display: inline-block;
+}
+
+
+.rec.big {
+    border-radius: 20%;
+    width: 300px;
+    height: 150px;
+    background-color: #428bca;
+    position: relative;
+    z-index: 1;
+}

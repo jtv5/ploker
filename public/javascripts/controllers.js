@@ -54,13 +54,17 @@ plannerPoker.controller('PokerTableCtrl', ['$scope', '$socket', function($scope,
 }]);
 
 plannerPoker.controller('PokerUserTableCtrl', ['$scope', '$socket', function($scope, $socket) {   
+    var parentdiv = document.getElementById('big-rec');
+    var width = parentdiv.offsetWidth;
+    var height = parentdiv.offsetHeight;
     $socket.on('updateUsers', function (data) {
-        console.log(getUserCoordinates(data));
-        $scope.users = getUserCoordinates(data);
+        //console.log(getUserCoordinatesRec(data));
+        data = ['1','2','3','4','5','6','7','8'];
+        $scope.users = getUserCoordinatesRec(data,width,height);
     });
 }]);
 
-function getUserCoordinates(users)
+function getUserCoordinatesCircle(users)
 {
     var numUser = users.length;
     var div = 360 / numUser;
@@ -72,12 +76,64 @@ function getUserCoordinates(users)
     var usersLocation = [];
     for (var i = 1; i <= numUser; ++i)
     {
-        var childdiv = document.createElement('div');
         var y = parseInt(Math.sin((div * i) * (Math.PI / 180)) * radius);
         var x = parseInt(Math.cos((div * i) * (Math.PI / 180)) * radius);
         var cord = {top: (y + totalOffset).toString() + "px", left: (x + totalOffset).toString() + "px"};
         cord['name'] = users[i-1];
         usersLocation.push(cord);
+    }
+    return usersLocation;
+}
+
+function getUserCoordinatesRec(users, parentOffsetWidth, parentOffsetHeight)
+{
+    var numUser = users.length;
+    //var div = 360 / numUser;
+    var radius = 25;
+    var width = parentOffsetWidth;
+    var height = parentOffsetHeight;
+    var usersLocation = [];
+    if(numUser%2) {
+        usersLocation.push({top: parseInt(height/2 - radius) + "px", left: -2*radius + "px", name: users[0]});
+        var num = (numUser-1)/2;
+        for (var i = 1; i <= num; ++i)
+        {
+            var y = -2*radius;
+            var x = parseInt(i * width / (num+1));
+            var cord = {top: y + "px", left: (x - radius).toString() + "px"};
+            cord['name'] = users[i];
+            usersLocation.push(cord);
+        }
+        var count = 1;
+        for (var i = num + 1; i < numUser; ++i)
+        {
+            var y = height;
+            var x = parseInt((count++) * width / (num+1));
+            var cord = {top: y + "px", left: (x - radius).toString() + "px"};
+            cord['name'] = users[i];
+            usersLocation.push(cord);
+        }
+    } else {
+        usersLocation.push({top: parseInt(height/2 - radius) + "px", left: -2*radius + "px", name: users[0]});
+        usersLocation.push({top: parseInt(height/2 - radius) + "px", left: width + "px", name: users[1]});
+        var num = (numUser-2)/2;
+        for (var i = 1; i <= num; ++i)
+        {
+            var y = -2*radius;
+            var x = parseInt(i * width / (num+1));
+            var cord = {top: y + "px", left: (x - radius).toString() + "px"};
+            cord['name'] = users[i+1];
+            usersLocation.push(cord);
+        }
+        var count = 1;
+        for (var i = num + 1; i < numUser-1; ++i)
+        {
+            var y = height;
+            var x = parseInt((count++) * width / (num+1));
+            var cord = {top: y + "px", left: (x - radius).toString() + "px"};
+            cord['name'] = users[i+1];
+            usersLocation.push(cord);
+        }
     }
     return usersLocation;
 }
