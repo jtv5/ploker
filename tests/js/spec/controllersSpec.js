@@ -39,48 +39,79 @@ describe('PlanningPokerCtrl', function(){
 */
 
 describe("getUserCoordinatesRec", function() {
+    var width = 200;
+    var height = 100;
+    var radius = 25;
     it("gets user coordinates around the table for one person", function() {
         var users = ['1'];
-        var width = 200;
-        var height = 100;
-        var expected = [{top: "25px", left: "-50px", name: "1"}]
+        var userCoord = new UserCoordinatesRec(users, radius, width, height);
+        var expected = [{top: "25px", left: "-50px", type: 'left'}]
+        expect(expected).toEqual(userCoord.getCoordinates());
+    });
 
-        expect(getUserCoordinatesRec(users,width,height)).toEqual(expected);
+    it("gets user coordinates and assigned name around the table for one person", function() {
+        var users = ['1'];
+        var userCoord = new UserCoordinatesRec(users, radius, width, height);
+        var expected = [{top: "25px", left: "-50px", type: 'left', name: "1"}]
+        expect(expected).toEqual(userCoord.getAssignedUsersToCoordinates());
     });
 
     it("gets user coordinates around the table for 2 people", function() {
         var users = ['1','2'];
-        var width = 200;
-        var height = 100;
+        var userCoord = new UserCoordinatesRec(users, radius, width, height);
         var expected = [
-          { top : '25px', left : '-50px', name : '1' },
-          { top : '25px', left : '200px', name : '2' }
+          { top : '25px', left : '-50px', type: 'left'},
+          { top : '25px', left : '200px', type: 'right'}
         ];
-        expect(getUserCoordinatesRec(users,width,height)).toEqual(expected);
+        expect(expected).toEqual(userCoord.getCoordinates());
     });
 
     it("gets user coordinates around the table for 3 people", function() {
         var users = ['1','2','3'];
-        var width = 200;
-        var height = 100;
+        var userCoord = new UserCoordinatesRec(users, radius, width, height);
         var expected = [
-          { top : '25px', left : '-50px', name : '1' },
-          { top : '-50px', left : '75px', name : '2' },
-          { top : '100px', left : '75px', name : '3' }
+          { top : '25px', left : '-50px', type: 'left'},
+          { top : '-50px', left : '75px', type: 'top'},
+          { top : '100px', left : '75px', type: 'bottom'}
         ];
-        expect(getUserCoordinatesRec(users,width,height)).toEqual(expected);
+        expect(expected).toEqual(userCoord.getCoordinates());
     });
 
     it("gets user coordinates around the table for 4 people", function() {
         var users = ['1','2','3','4'];
-        var width = 200;
-        var height = 100;
+        var userCoord = new UserCoordinatesRec(users, radius, width, height);
         var expected = [
-          { top : '25px', left : '-50px', name : '1' },
-          { top : '25px', left : '200px', name : '2' },
-          { top : '-50px', left : '75px', name : '3' },
-          { top : '100px', left : '75px', name : '4' }
+          { top : '25px', left : '-50px', type: 'left'},
+          { top : '25px', left : '200px', type: 'right'},
+          { top : '-50px', left : '75px', type: 'top'},
+          { top : '100px', left : '75px', type: 'bottom'}
         ];
-        expect(getUserCoordinatesRec(users,width,height)).toEqual(expected);
+        expect(expected).toEqual(userCoord.getCoordinates());
+    });
+
+    it("gets user coordinates around the table for 5 people", function() {
+        var users = ['1','2','3','4','5'];
+        var userCoord = new UserCoordinatesRec(users, radius, width, height);
+        var expected = [
+          { top : '25px', left : '-50px', type: 'left'},
+          { top : '-50px', left : '41px', type: 'top'},
+          { top : '-50px', left : '108px', type: 'top'},
+          { top : '100px', left : '41px', type: 'bottom'},
+          { top : '100px', left : '108px', type: 'bottom'}
+        ];
+        expect(expected).toEqual(userCoord.getCoordinates());
+    });
+
+    it("gets user coordinates and assigned name around the table for 5 people", function() {
+        var users = ['1','2','3','4','5'];
+        var userCoord = new UserCoordinatesRec(users, radius, width, height);
+        var expected = [
+          { top : '25px', left : '-50px', type: 'left', name: "1"},
+          { top : '-50px', left : '41px', type: 'top', name: "2"},
+          { top : '-50px', left : '108px', type: 'top', name: "3"},
+          { top : '100px', left : '41px', type: 'bottom', name: "4"},
+          { top : '100px', left : '108px', type: 'bottom', name: "5"}
+        ];
+        expect(expected).toEqual(userCoord.getAssignedUsersToCoordinates());
     });
 });

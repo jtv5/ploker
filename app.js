@@ -68,6 +68,8 @@ app.post('/login', function(req, res) {
     } else {
         token = getToken();
         cards[token] = [];
+    }
+    if(! users[token]) {
         users[token] = [];
     }
     users[token].push(req.body.name);

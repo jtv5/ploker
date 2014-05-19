@@ -45,3 +45,13 @@ div.poker-table div.row {
     position: relative;
     z-index: 1;
 }
+
+.circle .left, .circle .right, .circle .top  {
+    position: absolute;
+    top: -20px;
+}
+
+.circle .bottom {
+    position: absolute;
+    top: 45px;
+}
